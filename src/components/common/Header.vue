@@ -53,7 +53,7 @@ export default {
     #bg-img {
       width: 100%;
       height: 100%;
-      background: url("../../../assets/bg1.jpg") center center no-repeat;
+      background: url("../../assets/bg1.jpg") center center no-repeat;
       position: relative;
       z-index: -1;
       background-size: cover;
