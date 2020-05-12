@@ -3,7 +3,7 @@
     <p id="hitokoto"></p>
     <p id="footer-info">
       <span>
-        <a href="https://www.rinbowli.cn/">• rinbowli</a>
+        <a href="https://www.rinbowli.cn/">rinbowli</a>
       </span>
       <span>
         <a href="#" title="念念不忘，必有回响。" target="_blank">• Typecho</a>
