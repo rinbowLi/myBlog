@@ -3,6 +3,10 @@
     <div class="container">
       <div class="row">
         <div id="main" class="col-mb-12 col-8 col-offset-2">
+          <div class="title">
+            分类 {{curCatalog}} 下的文章
+            <br />
+          </div>
           <article
             itemscope
             itemtype="http://schema.org/BlogPosting"
@@ -19,7 +23,7 @@
             <div class="card-meta-top">
               <span class="card-meta-cate">
                 <i class="iconfont icon-biaoqian1"></i>
-                <router-link :to="'/catalog/'+item.catalog">{{item.catalog}}</router-link>
+                <span class="link" @click="linkToCurPage(item.catalog)">{{item.catalog}}</span>
               </span>
               <span class="card-meta-date">
                 <i class="iconfont icon-shijian"></i>
@@ -75,22 +79,27 @@
 </template>
 
 <script>
-import { selectArticleByPage, getArticleCount } from "@/network/home";
+import { selectArticleByCatalog } from "@/network/catalog";
+import { getArticleCount } from "@/network/home";
 import { getFormatDate, cutString } from "@/utils/utils";
 
 export default {
+  inject: ["routerRefresh"], //在子组件中注入在父组件中创建的属性
   data() {
     return {
       articleList: [],
+      curCatalog: "",
       articleCount: 0,
       curPage: 1,
       pageSize: 8,
-      bgImg: "https://www.rinbowli.cn/usr/uploads/images/bg4.jpg"
+      bgImg: "https://www.rinbowli.cn/usr/uploads/images/bg4.jpg",
+      paramsData: this.$route.params.catalog
     };
   },
   created() {
-    this.selectArticle();
-    this._getArticleCount();
+    let catalog = this.$route.params.catalog;
+    this.curCatalog = catalog;
+    this.getArticle(catalog);
   },
   computed: {
     showPagination() {
@@ -100,15 +109,12 @@ export default {
     }
   },
   methods: {
-    //分页查询文章
-    selectArticle(page = 1, pageSize = 10) {
-      let data = {
-        pageSize,
-        page
-      };
-      selectArticleByPage(data)
+    //按照分类分页查询文章
+    getArticle(catalog) {
+      selectArticleByCatalog({ catalog })
         .then(res => {
           this.articleList = res.data;
+          this.articleCount = res.data.length;
           this.articleList.map(v => {
             v.time = getFormatDate(v.time);
             v.content = cutString(v.content, 90);
@@ -118,9 +124,9 @@ export default {
           console.log(err);
         });
     },
-    //获取文章总数量
+        //获取文章总数量
     _getArticleCount() {
-      getArticleCount()
+      getArticleCount({ catalog })
         .then(res => {
           this.articleCount = res.data;
         })
@@ -135,14 +141,38 @@ export default {
       if (page < 1 || page > Math.ceil(this.articleCount / pageSize)) return;
       this.curPage = page;
       this.selectArticle(page, pageSize);
+    },
+    //跳转页面
+    linkToCurPage(paramsData) {
+      this.$router.push({
+        name: "Catalog",
+        params: {
+          catalog: paramsData
+        }
+      });
+      this.routerRefresh(); //调用app.vue里面的routerRefresh()方法，完成摧毁和重建过程
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+.title {
+  border-radius: 5px;
+  background-color: #fff;
+  margin: 30px 0;
+  color: rgba(0, 0, 0, 0.7);
+  padding: 15px;
+}
 #page-nav /deep/.number.active {
   background-color: #5a5e66;
   color: #ffffff;
+}
+.link {
+  color: #333333;
+  cursor: pointer;
+}
+.link:hover {
+  color: #8a8a8a;
 }
 </style>

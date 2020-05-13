@@ -18,14 +18,14 @@
     <div id="nav-right">
       <ul class="nav-right-list">
         <li class="nav-right-item" v-for="item in navList" :key="item.icon">
-          <a :href="item.link">
+          <a href="javascript:;" @click="linkToCurPage(item.link)">
             <i class="iconfont" :class="item.icon"></i>
             {{item.title}}
           </a>
         </li>
       </ul>
       <div id="nav-btns">
-        <i class="iconfont icon-sousuo" id="nav-search-btn"></i>
+        <i class="iconfont icon-sousuo" id="nav-search-btn" @click="showSearch"></i>
       </div>
     </div>
   </div>
@@ -34,6 +34,7 @@
 <script>
 export default {
   computed: {},
+  inject: ["routerRefresh"], //在子组件中注入在父组件中创建的属性
   data() {
     return {
       isShow: true,
@@ -41,27 +42,26 @@ export default {
       navList: [
         {
           title: "首页",
-          link: "/",
           icon: "icon-shouye"
         },
         {
           title: "HTML",
-          link: "/index.php/category/html/",
+          link: "html",
           icon: "icon-html1"
         },
         {
           title: "Javascript",
-          link: "/index.php/category/js/",
+          link: "js",
           icon: "icon-js"
         },
         {
           title: "Vue",
-          link: "/index.php/category/vue/",
+          link: "vue",
           icon: "icon-vue"
         },
         {
           title: "CSS",
-          link: "/index.php/category/css/",
+          link: "css",
           icon: "icon-css"
         }
       ]
@@ -78,6 +78,20 @@ export default {
       } else {
         this.isShow = true;
       }
+    },
+    //跳转页面
+    linkToCurPage(paramsData) {
+      if (!paramsData) this.$router.push("/");
+      this.$router.push({
+        name: "Catalog",
+        params: {
+          catalog: paramsData
+        }
+      });
+      this.routerRefresh(); //调用app.vue里面的routerRefresh()方法，完成摧毁和重建过程
+    },
+    showSearch() {
+      this.$emit("showSearchBox");
     }
   }
 };

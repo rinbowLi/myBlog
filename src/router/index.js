@@ -13,10 +13,12 @@ const routes = [
   {
     path: '/article/:id',
     name: 'Article',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/article/Article.vue')
+  },
+  {
+    path: '/catalog/:catalog',
+    name: 'Catalog',
+    component: () => import(/* webpackChunkName: "about" */ '../views/catalog/Catalog.vue')
   }
 ]
 
@@ -24,6 +26,12 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+//全局路由守卫，跳转新页面时滚动条回到顶部
+router.afterEach(() => {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
 })
 
 export default router

@@ -7,7 +7,7 @@
       <div class="post-meta">
         <span class="post-meta-label post-meta-views">{{article.viewsCount}}次阅读</span>
         <span class="post-meta-label post-meta-cate">
-          <a href="#">{{article.catalog}}</a>
+          <router-link :to="'/catalog/'+article.catalog">{{article.catalog}}</router-link>
         </span>
         <span class="post-meta-label post-meta-date">{{article.time}}</span>
       </div>
