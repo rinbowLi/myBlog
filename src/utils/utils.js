@@ -1,3 +1,8 @@
+import ClipboardJS from 'clipboard'
+import {
+  Message
+} from 'element-ui';
+
 //获取当前时间
 export function getFormatDate(dateString) {
   var nowDate = new Date(dateString);
@@ -38,4 +43,16 @@ export function cutString(str, len) {
     }
   }
   return s;
+}
+
+export function clipboard() {
+  var t = new ClipboardJS(".copy-code");
+  t.on("success", function (t) {
+    Message({
+      message: '代码成功拷贝到剪贴板！',
+      type: 'success'
+    }), t.clearSelection()
+  }), t.on("error", function (t) {
+    Message.error('代码拷贝失败')
+  })
 }

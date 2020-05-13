@@ -54,7 +54,7 @@
           </article>
 
           <div id="page-nav">
-            <ul>
+            <!-- <ul>
               <li class="page-current">
                 <a href="https://www.rinbowli.cn/index.php/page/1/">1</a>
               </li>
@@ -64,7 +64,17 @@
               <li class="next">
                 <a href="https://www.rinbowli.cn/index.php/page/2/">&gt;</a>
               </li>
-            </ul>
+            </ul>-->
+            <el-pagination
+              :current-page="curPage"
+              background
+              :page-size="pageSize"
+              layout="prev, pager, next,jumper"
+              :total="articleCount"
+              @current-change="handleCurrentChange"
+              @prev-click="pageTo(curPage-1)"
+              @next-click="pageTo(curPage+1)"
+            ></el-pagination>
           </div>
         </div>
         <!-- end #main-->
@@ -76,19 +86,25 @@
 </template>
 
 <script>
-import { selectArticleByPage } from "@/network/home";
+import { selectArticleByPage, getArticleCount } from "@/network/home";
 import { getFormatDate, cutString } from "@/utils/utils";
+
 export default {
   data() {
     return {
       articleList: [],
+      articleCount: 0,
+      curPage: 1,
+      pageSize: 8,
       bgImg: "https://www.rinbowli.cn/usr/uploads/images/bg4.jpg"
     };
   },
   created() {
     this.selectArticle();
+    this._getArticleCount();
   },
   methods: {
+    //分页查询文章
     selectArticle(page = 1, pageSize = 10) {
       let data = {
         pageSize,
@@ -99,16 +115,38 @@ export default {
           this.articleList = res.data;
           this.articleList.map(v => {
             v.time = getFormatDate(v.time);
-            v.content = cutString(v.content,90);
+            v.content = cutString(v.content, 90);
           });
         })
         .catch(err => {
           console.log(err);
         });
+    },
+    //获取文章总数量
+    _getArticleCount() {
+      getArticleCount()
+        .then(res => {
+          this.articleCount = res.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    handleCurrentChange(val){
+     this.pageTo(val,this.pageSize)
+    },
+    pageTo(page, pageSize = 10) {
+      if (page < 1 || page > Math.ceil(this.articleCount / pageSize)) return;
+      this.curPage = page;
+      this.selectArticle(page, pageSize);
     }
   }
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+#page-nav /deep/.number.active{
+   background-color: #5a5e66;
+   color: #ffffff;
+}
 </style>

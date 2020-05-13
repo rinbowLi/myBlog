@@ -8,10 +8,18 @@ export function login(data) {
   })
 }
 
-export function selectArticleByPage(data){
+export function selectArticleByPage(data) {
   return request({
     url: '/article/selectArticleByPage',
     method: 'post',
     data
-  }) 
+  })
+}
+
+export function getArticleCount(data) {
+  return request({
+    url: '/article/getArticleCount',
+    method: 'post',
+    data
+  })
 }

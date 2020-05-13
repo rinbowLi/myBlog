@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="post-body">
-      <div class="post-content" v-html="article.content"></div>
+      <div class="post-content" v-highlight v-html="article.content"></div>
       <div class="post-other"></div>
       <div class="post-update">
         <i class="iconfont icon-shijian"></i>
