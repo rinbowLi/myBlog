@@ -9,7 +9,7 @@
       <a href="/">
         <img
           id="site-avatar"
-          v-lazy="'https://www.rinbowli.cn/usr/uploads/images/touxiang.jpg'"
+          src="@/assets/touxiang.jpg"
           style="height: 35px; width: 35px; margin: 14.5px 5px 0px 0px;"
         />
         {{siteName}}

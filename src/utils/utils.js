@@ -15,6 +15,22 @@ export function getFormatDate(dateString) {
     nowDate.getDate() < 10 ? "0" + nowDate.getDate() : nowDate.getDate();
   return year + "-" + month + "-" + date;
 }
+
+export function getFormatTime(dateString) {
+  var nowDate = new Date(dateString);
+  var year = nowDate.getFullYear();
+  var month =
+    nowDate.getMonth() + 1 < 10 ?
+    "0" + (nowDate.getMonth() + 1) :
+    nowDate.getMonth() + 1;
+  var date =
+    nowDate.getDate() < 10 ? "0" + nowDate.getDate() : nowDate.getDate();
+  var hour =
+    nowDate.getHours() < 10 ? "0" + nowDate.getHours() : nowDate.getHours();
+  var min =
+    nowDate.getMinutes() < 10 ? "0" + nowDate.getMinutes() : nowDate.getMinutes();
+  return year + "-" + month + "-" + date + " " + hour + ":" + min;
+}
 /**参数说明： 
  * 根据长度截取先使用字符串，超长部分追加… 
  * str 对象字符串 
@@ -46,13 +62,15 @@ export function cutString(str, len) {
 }
 
 export function clipboard() {
-  var t = new ClipboardJS(".copy-code");
-  t.on("success", function (t) {
+  //为类名为copy-code的元素添加复制操作
+  var clipboard = new ClipboardJS(".copy-code");
+  //复制成功回调
+  clipboard.on("success", function (t) {
     Message({
       message: '代码成功拷贝到剪贴板！',
       type: 'success'
     }), t.clearSelection()
-  }), t.on("error", function (t) {
+  }), clipboard.on("error", function (t) { //复制失败回调
     Message.error('代码拷贝失败')
   })
 }
