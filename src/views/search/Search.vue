@@ -1,18 +1,20 @@
-<template commit>
-  <div class="home" ref="home">
+<template>
+  <div class="catalog">
     <Article />
   </div>
 </template>
 
 <script>
 import Article from "./components/articleList";
-import { login } from "../../network/home";
+
 export default {
-  name: "Home",
+  name: "Search",
   components: {
     Article
   },
-  created() {},
+  data() {
+    return {};
+  },
   methods: {}
 };
 </script>

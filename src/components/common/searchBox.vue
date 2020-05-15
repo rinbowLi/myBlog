@@ -3,24 +3,42 @@
     <span class="close" @click="toggle(false)">
       <i class="iconfont icon-guanbi"></i>
     </span>
-    <input type="text" name="s" id="search-text" placeholder="想要看什么？" />
-    <button type="submit" id="search-button">
+    <input type="text" name="s" id="search-text" placeholder="想要看什么？" v-model="keyword" />
+    <button type="submit" id="search-button" @click="search">
       <i class="iconfont icon-sousuo"></i>
     </button>
   </div>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+import { Message } from "element-ui";
 export default {
   name: "searchBox",
+  inject: ["routerRefresh"], //在子组件中注入在父组件中创建的属性
   data() {
     return {
-      isShow: false
+      isShow: false,
+      keyword: ""
     };
   },
   methods: {
+    ...mapMutations(["setKeyword"]),
     toggle(flag) {
       this.isShow = flag;
+    },
+    search() {
+      if (!this.keyword) {
+        Message({
+          message: "请先填写搜索关键字哦~",
+          type: "warning"
+        });
+        return;
+      }
+      this.setKeyword(this.keyword);
+      this.$router.push("/search");
+      this.routerRefresh(); //调用app.vue里面的routerRefresh()方法，完成摧毁和重建过程
+      this.isShow = false;
     }
   }
 };

@@ -85,7 +85,7 @@ export default {
       articleCount: 0,
       curPage: 1,
       pageSize: 8,
-      bgImg: "https://www.rinbowli.cn/usr/uploads/images/bg4.jpg"
+      bgImg: require("@/assets/bg4.jpg")
     };
   },
   created() {

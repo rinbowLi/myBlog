@@ -10,25 +10,33 @@
             <Reward />
 
             <div class="post-footer nextprev">
-              <div class="post-footer-box half previous">
-                <a href="https://www.rinbowli.cn/index.php/archives/10/" rel="prev">
+              <div
+                class="post-footer-box half previous"
+                v-if="Object.keys(prev).length>0"
+                @click="linkToCurPage(prev._id)"
+              >
+                <a>
                   <div class="post-footer-thumbnail">
-                    <img v-lazy="'https://www.rinbowli.cn/usr/uploads/images/bg4.jpg'" />
+                    <img :src="require('@/assets/bg4.jpg')" />
                   </div>
                   <span class="post-footer-label">Previous Post</span>
                   <div class="post-footer-title">
-                    <h3>vue中provide/inject的使用</h3>
+                    <h3>{{prev.title}}</h3>
                   </div>
                 </a>
               </div>
-              <div class="post-footer-box half next">
-                <a href="https://www.rinbowli.cn/index.php/archives/19/" rel="next">
+              <div
+                class="post-footer-box half next"
+                v-if="Object.keys(next).length>0"
+                @click="linkToCurPage(next._id)"
+              >
+                <a>
                   <div class="post-footer-thumbnail">
-                    <img v-lazy="'https://www.rinbowli.cn/usr/uploads/images/bg4.jpg'" />
+                    <img :src="require('@/assets/bg4.jpg')" />
                   </div>
                   <span class="post-footer-label">Next Post</span>
                   <div class="post-footer-title">
-                    <h3>盘点JavaScript中的一些骚操作~</h3>
+                    <h3>{{next.title}}</h3>
                   </div>
                 </a>
               </div>
@@ -50,8 +58,11 @@ import Reward from "./components/Reward";
 import ArticleContent from "./components/ArticleContent";
 import Comments from "./components/Comments";
 
+import { selectNextAndPrevArticle } from "@/network/article";
+
 export default {
   name: "Article",
+  inject: ["routerRefresh"], //在子组件中注入在父组件中创建的属性
   components: {
     Reward,
     ArticleContent,
@@ -59,14 +70,39 @@ export default {
   },
   data() {
     return {
-      allowComment: true,
-      commentCount: 0,
-      content: "",
-      name: "",
-      relatedArticleId: "",
-      parent: 0,
-      commentsList: []
+      articleSortId: "",
+      next: {},
+      prev: {}
     };
+  },
+  mounted() {
+    this.$bus.$on("articleSortId", data => {
+      this.articleSortId = data;
+      this.selectNextAndPrevArticleByID(data);
+    });
+  },
+  methods: {
+    selectNextAndPrevArticleByID(id) {
+      selectNextAndPrevArticle({ id })
+        .then(res => {
+          console.log(res);
+          this.next = res.data.next[0];
+          this.prev = res.data.prev[0];
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    //跳转页面
+    linkToCurPage(paramsData) {
+      this.$router.push({
+        name: "Article",
+        params: {
+          id: paramsData
+        }
+      });
+      this.routerRefresh(); //调用app.vue里面的routerRefresh()方法，完成摧毁和重建过程
+    }
   }
 };
 </script>
@@ -74,5 +110,14 @@ export default {
 <style lang="scss" scoped>
 #site-meta {
   display: none;
+}
+.nextprev {
+  cursor: pointer;
+  .post-footer-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+  }
 }
 </style>

@@ -22,7 +22,7 @@
             </a>
             <div class="comment-content">
               <div class="comment-text">
-                <span class="comment-reply" style="float:right" title="回复" @click="reply(item.id)">
+                <span class="comment-reply" style="float:right" title="回复" @click="replyTo(item.id,item.name)">
                   <a href="javascript:;" rel="nofollow">
                     <i class="iconfont icon-huifu"></i>
                   </a>
@@ -69,7 +69,7 @@
                           class="comment-reply"
                           style="float:right"
                           title="回复"
-                          @click="reply(item.id)"
+                          @click="replyTo(item.id,item1.name)"
                         >
                           <a href="javascript:;" rel="nofollow">
                             <i class="iconfont icon-huifu"></i>
@@ -172,6 +172,7 @@ export default {
       name: "",
       relatedArticleId: "",
       parent: 0,
+      reply:"",
       commentsList: []
     };
   },
@@ -194,6 +195,7 @@ export default {
       let name = this.name;
       let relatedArticleId = this.relatedArticleId;
       let parent = this.parent;
+      let reply = this.reply;
       if (!name) {
         Message({
           message: "请先填写昵称哦~",
@@ -212,7 +214,8 @@ export default {
         content,
         name,
         relatedArticleId,
-        parent
+        parent,
+        reply
       };
       addComments(data)
         .then(res => {
@@ -225,6 +228,7 @@ export default {
             this.content = "";
             this.name = "";
             this.parent = 0;
+            this.reply = "";
             this.selectComments(this.relatedArticleId);
             this.commentCount += 1;
           }
@@ -249,8 +253,9 @@ export default {
       console.log(data);
       return getFormatTime(data);
     },
-    reply(id) {
+    replyTo(id,name) {
       this.parent = id;
+      this.reply = name;
       this.$refs.author.focus();
     },
   }

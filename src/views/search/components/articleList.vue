@@ -4,7 +4,7 @@
       <div class="row">
         <div id="main" class="col-mb-12 col-8 col-offset-2">
           <div class="title">
-            分类 {{curCatalog}} 下的文章
+            包含关键字 {{$store.state.keyword}} 的文章
             <br />
           </div>
           <article
@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import { selectArticleByCatalog } from "@/network/catalog";
+import { selectArticleBykeyword } from "@/network/search";
 import { getArticleCount } from "@/network/home";
 import { getFormatDate, cutString } from "@/utils/utils";
 
@@ -92,14 +92,11 @@ export default {
       articleCount: 0,
       curPage: 1,
       pageSize: 8,
-      bgImg: require("@/assets/bg4.jpg"),
-      paramsData: this.$route.params.catalog
+      bgImg: require("@/assets/bg4.jpg")
     };
   },
   created() {
-    let catalog = this.$route.params.catalog;
-    this.curCatalog = catalog;
-    this.getArticle(catalog);
+    this.getArticle(this.$store.state.keyword);
   },
   computed: {
     showPagination() {
@@ -110,8 +107,8 @@ export default {
   },
   methods: {
     //按照分类分页查询文章
-    getArticle(catalog) {
-      selectArticleByCatalog({ catalog })
+    getArticle(keyword) {
+      selectArticleBykeyword({ keyword })
         .then(res => {
           this.articleList = res.data;
           this.articleCount = res.data.length;

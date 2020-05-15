@@ -58,6 +58,7 @@ export default {
           this.$bus.$emit("commentCount", this.article.commentCount);
           this.$bus.$emit("allowComment", this.article.allowComment === 1);
           this.$bus.$emit("articleId", this.article._id);
+          this.$bus.$emit("articleSortId", this.article.id);
         })
         .catch(err => {
           console.log(err);

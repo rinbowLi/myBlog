@@ -4,8 +4,13 @@ import Home from '../views/home/Home.vue'
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
+//重写push
+const VueRouterPush = VueRouter.prototype.push 
+VueRouter.prototype.push = function push (to) {
+    return VueRouterPush.call(this, to).catch(err => err)
+}
+
+const routes = [{
     path: '/',
     name: 'Home',
     component: Home
@@ -13,12 +18,17 @@ const routes = [
   {
     path: '/article/:id',
     name: 'Article',
-    component: () => import(/* webpackChunkName: "about" */ '../views/article/Article.vue')
+    component: () => import( /* webpackChunkName: "about" */ '../views/article/Article.vue')
   },
   {
     path: '/catalog/:catalog',
     name: 'Catalog',
-    component: () => import(/* webpackChunkName: "about" */ '../views/catalog/Catalog.vue')
+    component: () => import( /* webpackChunkName: "about" */ '../views/catalog/Catalog.vue')
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: () => import( /* webpackChunkName: "about" */ '../views/search/Search.vue')
   }
 ]
 
