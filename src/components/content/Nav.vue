@@ -42,27 +42,28 @@ export default {
       navList: [
         {
           title: "首页",
+          link: "/",
           icon: "icon-shouye"
         },
         {
-          title: "HTML",
-          link: "html",
-          icon: "icon-html1"
+          title: "时光轴",
+          link: "/timeline",
+          icon: "icon-shiguangwang"
         },
         {
-          title: "Javascript",
-          link: "js",
-          icon: "icon-js"
+          title: "关于",
+          link: "/about",
+          icon: "icon-guanyu"
         },
         {
-          title: "Vue",
-          link: "vue",
-          icon: "icon-vue"
+          title: "留言",
+          link: "/message",
+          icon: "icon-iconfontpinglunhou"
         },
         {
-          title: "CSS",
-          link: "css",
-          icon: "icon-css"
+          title: "友链",
+          link: "/link",
+          icon: "icon-lianjie"
         }
       ]
     };
@@ -81,13 +82,7 @@ export default {
     },
     //跳转页面
     linkToCurPage(paramsData) {
-      if (!paramsData) this.$router.push("/");
-      this.$router.push({
-        name: "Catalog",
-        params: {
-          catalog: paramsData
-        }
-      });
+      this.$router.push(paramsData);
       this.routerRefresh(); //调用app.vue里面的routerRefresh()方法，完成摧毁和重建过程
     },
     showSearch() {

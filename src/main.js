@@ -3,7 +3,10 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import {
-  Pagination
+  Pagination,
+  Timeline,
+  TimelineItem,
+  Card
 } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
@@ -52,6 +55,9 @@ Vue.use(VueLazyLoad, {
   attempt: 1
 })
 Vue.use(Pagination);
+Vue.use(Timeline);
+Vue.use(TimelineItem);
+Vue.use(Card);
 
 Vue.config.productionTip = false
 

@@ -1,10 +1,12 @@
 <template>
   <div id="app">
     <!-- 头部背景图片 -->
-    <Header :siteData="siteData"/>
+    <Header :siteData="siteData" v-if="$route.path!='/timeline'"/>
     <!-- 首页头部导航 -->
     <Nav @showSearchBox="showSearchBox" />
-    <router-view v-if="routerAlive" />
+    <keep-alive exclude="Article">
+        <router-view v-if="routerAlive" />
+    </keep-alive>
     <Footer />
     <backTop />
     <searchBox ref="searchBox" />
@@ -12,11 +14,11 @@
 </template>
 
 <script>
-import Footer from "./components/common/footer";
-import Header from "./components/common/Header";
-import Nav from "./components/common/Nav";
-import backTop from "./components/common/backTop";
-import searchBox from "./components/common/searchBox";
+import Footer from "./components/content/footer";
+import Header from "./components/content/Header";
+import Nav from "./components/content/Nav";
+import backTop from "./components/content/backTop";
+import searchBox from "./components/content/searchBox";
 export default {
   components: {
     Footer,

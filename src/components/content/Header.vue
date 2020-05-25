@@ -1,5 +1,6 @@
 <template>
   <header id="header" :style="{height:siteData.show?'100vh':'80vh'}">
+    <Bubble />
     <div id="site-meta" v-show="siteData.show">
       <h1 id="site-name">{{siteData.siteName}}</h1>
       <h2 id="site-description">{{siteData.siteDescription}}</h2>
@@ -9,7 +10,15 @@
 </template>
 
 <script>
+//import Colck from '../common/clockCanvas'
+import Bubble from "../common/BubbleCanvas";
+//import Polaris from '../common/PolarisCanvas'
 export default {
+  components: {
+    //Colck,
+    Bubble
+    //Polaris
+  },
   props: {
     siteData: {
       type: Object,
@@ -18,7 +27,7 @@ export default {
           siteName: "rinbowli",
           siteDescription: "95后前端开发攻城狮,欢迎来到我的博客。",
           url: require("../../assets/bg1.jpg"),
-          show:true
+          show: true
         };
       }
     }
