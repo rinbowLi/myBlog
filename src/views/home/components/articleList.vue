@@ -84,7 +84,7 @@ export default {
       articleList: [],
       articleCount: 0,
       curPage: 1,
-      pageSize: 8,
+      pageSize: 10,
       bgImg: require("@/assets/bg4.jpg")
     };
   },

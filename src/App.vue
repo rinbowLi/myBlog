@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <!-- 头部背景图片 -->
-    <Header :siteData="siteData" v-if="$route.path!='/timeline'"/>
+    <Header :siteData="siteData" v-if="show" />
     <!-- 首页头部导航 -->
     <Nav @showSearchBox="showSearchBox" />
     <keep-alive exclude="Article">
-        <router-view v-if="routerAlive" />
+      <router-view v-if="routerAlive" />
     </keep-alive>
     <Footer />
     <backTop />
@@ -44,6 +44,10 @@ export default {
           show: true
         };
       }
+    },
+    show() {
+      let notShow = ["/timeline", "/about", "/message"];
+      return !notShow.includes(this.$route.path);
     }
   },
   data() {
