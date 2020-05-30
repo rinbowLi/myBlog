@@ -29,15 +29,6 @@
             <p class="link-s">{{item.desc}}</p>
           </a>
         </li>
-        <li class="link-item">
-          <a target="_blank" href="https://www.valzt.cn">
-            <div class="link-f">
-              <img class="linkLogo" src="https://www.valzt.cn/media/avatar.png" />
-              <span>Valcosmos</span>
-            </div>
-            <p class="link-s">一只向往未来和远方的小小程序猿(Web前端)</p>
-          </a>
-        </li>
       </ul>
     </div>
   </div>
