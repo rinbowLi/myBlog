@@ -5,9 +5,9 @@ import Home from '../views/home/Home.vue'
 Vue.use(VueRouter)
 
 //重写push
-const VueRouterPush = VueRouter.prototype.push 
-VueRouter.prototype.push = function push (to) {
-    return VueRouterPush.call(this, to).catch(err => err)
+const VueRouterPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(to) {
+  return VueRouterPush.call(this, to).catch(err => err)
 }
 
 const routes = [{
@@ -44,6 +44,11 @@ const routes = [{
     path: '/message',
     name: 'Message',
     component: () => import( /* webpackChunkName: "about" */ '../views/message/Message.vue')
+  },
+  {
+    path: '/link',
+    name: 'Link',
+    component: () => import( /* webpackChunkName: "about" */ '../views/link/Link.vue')
   }
 ]
 

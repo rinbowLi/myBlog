@@ -46,7 +46,7 @@ export default {
       }
     },
     show() {
-      let notShow = ["/timeline", "/about", "/message"];
+      let notShow = ["/timeline", "/about", "/message", "/link"];
       return !notShow.includes(this.$route.path);
     }
   },
