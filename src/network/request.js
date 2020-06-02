@@ -45,6 +45,17 @@ service.interceptors.response.use(
     const res = response.data
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 0) {
+      if(res.code === 401){
+        Message({
+          message: "登录已超时，请重新登录",
+          type: 'error',
+          duration: 5 * 1000
+        })
+        store.dispatch('resetToken').then(() => {
+          location.reload()
+        })
+        return Promise.reject(new Error('登录已超时，请重新登录'))
+      }
       Message({
         message: res.message || 'Error',
         type: 'error',
@@ -59,7 +70,7 @@ service.interceptors.response.use(
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          store.dispatch('user/resetToken').then(() => {
+          store.dispatch('resetToken').then(() => {
             location.reload()
           })
         })

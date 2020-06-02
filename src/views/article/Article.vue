@@ -12,7 +12,7 @@
             <div class="post-footer nextprev">
               <div
                 class="post-footer-box half previous"
-                v-if="Object.keys(prev).length>0"
+                v-if="prev&&Object.keys(prev).length>0"
                 @click="linkToCurPage(prev._id)"
               >
                 <a>
@@ -27,7 +27,7 @@
               </div>
               <div
                 class="post-footer-box half next"
-                v-if="Object.keys(next).length>0"
+                v-if="next&&Object.keys(next).length>0"
                 @click="linkToCurPage(next._id)"
               >
                 <a>
@@ -86,8 +86,9 @@ export default {
       selectNextAndPrevArticle({ id })
         .then(res => {
           console.log(res);
-          this.next = res.data.next[0];
-          this.prev = res.data.prev[0];
+          debugger;
+          this.next = res.data.next[0] || {};
+          this.prev = res.data.prev[0] || {};
         })
         .catch(err => {
           console.log(err);

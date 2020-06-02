@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <link href="http://at.alicdn.com/t/font_1799896_a74iw9aosr9.css" rel="stylesheet"/>
+    <link href="http://at.alicdn.com/t/font_1799896_yxbwhi7xd3.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="assets/waifu.css" />
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
@@ -14,5 +15,13 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+    <script src="assets/waifu-tips.js"></script>
+    <script src="assets/live2d.js"></script>
+    <script type="text/javascript">
+      window.onload = function () {
+        initModel("assets/")
+      }
+    </script>
   </body>
 </html>

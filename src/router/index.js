@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/home/Home.vue'
+import {
+  getToken
+} from '../utils/auth'
 
 Vue.use(VueRouter)
 
@@ -13,42 +16,82 @@ VueRouter.prototype.push = function push(to) {
 const routes = [{
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: {
+      needLogin: false
+    }
   },
   {
     path: '/article/:id',
     name: 'Article',
-    component: () => import( /* webpackChunkName: "about" */ '../views/article/Article.vue')
+    component: () => import( /* webpackChunkName: "about" */ '../views/article/Article.vue'),
+    meta: {
+      needLogin: false
+    }
   },
   {
     path: '/catalog/:catalog',
     name: 'Catalog',
-    component: () => import( /* webpackChunkName: "about" */ '../views/catalog/Catalog.vue')
+    component: () => import( /* webpackChunkName: "about" */ '../views/catalog/Catalog.vue'),
+    meta: {
+      needLogin: false
+    }
   },
   {
     path: '/search',
     name: 'Search',
-    component: () => import( /* webpackChunkName: "about" */ '../views/search/Search.vue')
+    component: () => import( /* webpackChunkName: "about" */ '../views/search/Search.vue'),
+    meta: {
+      needLogin: false
+    }
   },
   {
     path: '/timeline',
     name: 'Timeline',
-    component: () => import( /* webpackChunkName: "about" */ '../views/timeline/Timeline.vue')
+    component: () => import( /* webpackChunkName: "about" */ '../views/timeline/Timeline.vue'),
+    meta: {
+      needLogin: false
+    }
   },
   {
     path: '/about',
     name: 'About',
-    component: () => import( /* webpackChunkName: "about" */ '../views/about/About.vue')
+    component: () => import( /* webpackChunkName: "about" */ '../views/about/About.vue'),
+    meta: {
+      needLogin: false
+    }
   },
   {
     path: '/message',
     name: 'Message',
-    component: () => import( /* webpackChunkName: "about" */ '../views/message/Message.vue')
+    component: () => import( /* webpackChunkName: "about" */ '../views/message/Message.vue'),
+    meta: {
+      needLogin: false
+    }
   },
   {
     path: '/link',
     name: 'Link',
-    component: () => import( /* webpackChunkName: "about" */ '../views/link/Link.vue')
+    component: () => import( /* webpackChunkName: "about" */ '../views/link/Link.vue'),
+    meta: {
+      needLogin: false
+    }
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import( /* webpackChunkName: "about" */ '../views/login/Login.vue'),
+    meta: {
+      needLogin: false
+    }
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: () => import( /* webpackChunkName: "about" */ '../views/admin/Admin.vue'),
+    meta: {
+      needLogin: true
+    }
   }
 ]
 
@@ -59,9 +102,15 @@ const router = new VueRouter({
 })
 
 //全局路由守卫，跳转新页面时滚动条回到顶部
-router.afterEach(() => {
+router.beforeEach((to, from, next) => {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
+  let token = getToken();
+  if (to.meta.needLogin && !token) {
+    next("/login" + "?redirect=" + from.fullPath)
+  } else {
+    next()
+  }
 })
 
 export default router

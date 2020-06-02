@@ -4,9 +4,16 @@ import router from './router'
 import store from './store'
 import {
   Pagination,
-  Timeline,
-  TimelineItem,
-  Card
+  Form,
+  FormItem,
+  Input,
+  Tooltip,
+  Button,
+  Menu,
+  Submenu,
+  MenuItem,
+  MenuItemGroup,
+  Col
 } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
@@ -55,9 +62,16 @@ Vue.use(VueLazyLoad, {
   attempt: 1
 })
 Vue.use(Pagination);
-Vue.use(Timeline);
-Vue.use(TimelineItem);
-Vue.use(Card);
+Vue.use(Form);
+Vue.use(FormItem);
+Vue.use(Input);
+Vue.use(Tooltip);
+Vue.use(Button);
+Vue.use(Menu);
+Vue.use(Submenu);
+Vue.use(MenuItem);
+Vue.use(MenuItemGroup);
+Vue.use(Col);
 
 Vue.config.productionTip = false
 

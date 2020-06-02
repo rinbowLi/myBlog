@@ -13,6 +13,7 @@
     "core-js": "^3.6.4",
     "element-ui": "^2.13.1",
     "highlight.js": "^10.0.2",
+    "js-cookie": "^2.2.1",
     "marked": "^1.0.0",
     "normalize.css": "^8.0.1",
     "vue": "^2.6.11",

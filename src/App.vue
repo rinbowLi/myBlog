@@ -3,13 +3,26 @@
     <!-- 头部背景图片 -->
     <Header :siteData="siteData" v-if="show" />
     <!-- 首页头部导航 -->
-    <Nav @showSearchBox="showSearchBox" />
+    <Nav @showSearchBox="showSearchBox" v-show="ShowNavAndHeader" />
     <keep-alive exclude="Article">
       <router-view v-if="routerAlive" />
     </keep-alive>
-    <Footer />
-    <backTop />
+    <Footer v-show="ShowNavAndHeader" />
+    <backTop v-show="ShowNavAndHeader" />
     <searchBox ref="searchBox" />
+    <div class="waifu">
+      <div class="waifu-tips"></div>
+      <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+      <div class="waifu-tool">
+        <span class="fui-home"></span>
+        <span class="fui-chat"></span>
+        <span class="fui-eye"></span>
+        <span class="fui-user"></span>
+        <span class="fui-photo"></span>
+        <span class="fui-info-circle"></span>
+        <span class="fui-cross"></span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -46,7 +59,21 @@ export default {
       }
     },
     show() {
-      let notShow = ["/timeline", "/about", "/message", "/link"];
+      let notShow = [
+        "/timeline",
+        "/about",
+        "/message",
+        "/link",
+        "/login",
+        "/admin"
+      ];
+      return !notShow.includes(this.$route.path);
+    },
+    ShowNavAndHeader(){
+        let notShow = [
+        "/login",
+        "/admin"
+      ];
       return !notShow.includes(this.$route.path);
     }
   },
