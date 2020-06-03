@@ -63,8 +63,8 @@
 </template>
 
 <script>
-import {login} from '@/network/user'
-import {  setToken, removeToken } from '@/utils/auth'
+import { login } from "@/network/user";
+import { setToken, removeToken } from "@/utils/auth";
 export default {
   name: "Login",
   data() {
@@ -138,10 +138,11 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          this.loading = true
-          login( this.loginForm)
-            .then((res) => {
-             setToken(res.result)
+          this.loading = true;
+          login(this.loginForm)
+            .then(res => {
+              setToken(res.result.token);
+              this.$store.commit("SET_USERNAME", res.result.username);
               this.$router.push("/admin");
               this.loading = false;
             })
