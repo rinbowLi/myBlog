@@ -1,13 +1,5 @@
 import request from '@/network/request'
 
-export function login(data) {
-  return request({
-    url: '/user/login',
-    method: 'post',
-    data
-  })
-}
-
 //根据页码查询文章
 export function selectArticleByPage(data) {
   return request({

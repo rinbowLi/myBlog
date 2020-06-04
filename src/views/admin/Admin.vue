@@ -42,7 +42,7 @@
         </span>
       </div>
     </div>
-    <router-view></router-view>
+    <router-view class="router-view"></router-view>
   </div>
 </template>
 
@@ -58,8 +58,8 @@ export default {
       console.log(key, keyPath);
     },
     logout() {
-      removeToken()
-      location.reload()
+      removeToken();
+      location.reload();
     }
   }
 };
@@ -84,5 +84,8 @@ export default {
       cursor: pointer;
     }
   }
+}
+.router-view{
+  margin-left: 12.5%;
 }
 </style>

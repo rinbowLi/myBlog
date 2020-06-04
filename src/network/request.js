@@ -1,24 +1,31 @@
 import axios from 'axios'
-import { MessageBox, Message } from 'element-ui'
+import {
+  MessageBox,
+  Message
+} from 'element-ui'
 import store from '@/store'
-//import { getToken } from '@/utils/auth'
+import {
+  getToken
+} from '@/utils/auth'
 
 // 创建一个axios实例
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
-   withCredentials: true, // send cookies when cross-domain requests
-  timeout: 5000 // request timeout
+  withCredentials: true, // send cookies when cross-domain requests
+  timeout: 5000, // request timeout
 })
 
 // 请求拦截
 service.interceptors.request.use(
   config => {
 
-    if (store.getters.token) {
+    if (store.state.token) {
       // let each request carry token
       // ['X-Token'] is a custom headers key
       // please modify it according to the actual situation
-      config.headers['X-Token'] = getToken()
+      let token = getToken();
+     //这里巨坑，必须固定格式 Bearer后面接一个空格再加token，否则报格式不对错误
+      config.headers.authorization  = "Bearer "+ token;  
     }
     return config
   },
@@ -34,7 +41,7 @@ service.interceptors.response.use(
   /**
    * If you want to get http information such as headers or status
    * Please return  response => response
-  */
+   */
 
   /**
    * Determine the request status by custom code
@@ -45,7 +52,7 @@ service.interceptors.response.use(
     const res = response.data
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 0) {
-      if(res.code === 401){
+      if (res.code === 401) {
         Message({
           message: "登录已超时，请重新登录",
           type: 'error',

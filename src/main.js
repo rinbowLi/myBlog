@@ -13,7 +13,10 @@ import {
   Submenu,
   MenuItem,
   MenuItemGroup,
-  Col
+  Col,
+  Table,
+  TableColumn,
+  Dialog
 } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
@@ -72,6 +75,9 @@ Vue.use(Submenu);
 Vue.use(MenuItem);
 Vue.use(MenuItemGroup);
 Vue.use(Col);
+Vue.use(Table);
+Vue.use(TableColumn);
+Vue.use(Dialog);
 
 Vue.config.productionTip = false
 

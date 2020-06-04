@@ -67,14 +67,17 @@ export default {
         "/login",
         "/admin"
       ];
-      return !notShow.includes(this.$route.path);
+      return (
+        !notShow.includes(this.$route.path) &&
+        this.$route.path.indexOf("admin") === -1
+      );
     },
-    ShowNavAndHeader(){
-        let notShow = [
-        "/login",
-        "/admin"
-      ];
-      return !notShow.includes(this.$route.path);
+    ShowNavAndHeader() {
+      let notShow = ["/login", "/admin"];
+      return (
+        !notShow.includes(this.$route.path) &&
+        this.$route.path.indexOf("admin") === -1
+      );
     }
   },
   data() {

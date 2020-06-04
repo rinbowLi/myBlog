@@ -88,10 +88,21 @@ const routes = [{
   {
     path: '/admin',
     name: 'Admin',
+    redirect: "/admin/articleManagement",
     component: () => import( /* webpackChunkName: "about" */ '../views/admin/Admin.vue'),
     meta: {
       needLogin: true
-    }
+    },
+    children:[
+      {
+        path:'articleManagement',
+        name: 'ArticleManagement',
+        component: () => import( /* webpackChunkName: "about" */ '../views/admin/articleManagement/ArticleManagement.vue'),
+        meta: {
+          needLogin: true
+        }
+      }
+    ]
   }
 ]
 
