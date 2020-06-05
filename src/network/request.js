@@ -24,8 +24,8 @@ service.interceptors.request.use(
       // ['X-Token'] is a custom headers key
       // please modify it according to the actual situation
       let token = getToken();
-     //这里巨坑，必须固定格式 Bearer后面接一个空格再加token，否则报格式不对错误
-      config.headers.authorization  = "Bearer "+ token;  
+      //这里巨坑，必须固定格式 Bearer后面接一个空格再加token，否则报格式不对错误
+      config.headers.authorization = "Bearer " + token;
     }
     return config
   },

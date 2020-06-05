@@ -93,15 +93,46 @@ const routes = [{
     meta: {
       needLogin: true
     },
-    children:[
-      {
-        path:'articleManagement',
+    children: [{
+        path: 'articleManagement',
         name: 'ArticleManagement',
         component: () => import( /* webpackChunkName: "about" */ '../views/admin/articleManagement/ArticleManagement.vue'),
         meta: {
           needLogin: true
         }
-      }
+      },
+      {
+        path: 'commentManagment',
+        name: 'CommentManagment',
+        component: () => import( /* webpackChunkName: "about" */ '../views/admin/commentManagment/CommentManagment.vue'),
+        meta: {
+          needLogin: true
+        }
+      },
+      {
+        path: 'messageManagment',
+        name: 'MessageManagment',
+        component: () => import( /* webpackChunkName: "about" */ '../views/admin/messageManagment/MessageManagment.vue'),
+        meta: {
+          needLogin: true
+        }
+      },
+      {
+        path: 'timelineManagment',
+        name: 'TimelineManagment',
+        component: () => import( /* webpackChunkName: "about" */ '../views/admin/timelineManagment/TimelineManagment.vue'),
+        meta: {
+          needLogin: true
+        }
+      },
+      {
+        path: 'linkManagment',
+        name: 'LinkManagment',
+        component: () => import( /* webpackChunkName: "about" */ '../views/admin/linkManagment/LinkManagment.vue'),
+        meta: {
+          needLogin: true
+        }
+      },
     ]
   }
 ]

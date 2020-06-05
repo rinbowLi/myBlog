@@ -16,7 +16,8 @@ import {
   Col,
   Table,
   TableColumn,
-  Dialog
+  Dialog,
+  Switch
 } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
@@ -78,6 +79,7 @@ Vue.use(Col);
 Vue.use(Table);
 Vue.use(TableColumn);
 Vue.use(Dialog);
+Vue.use(Switch);
 
 Vue.config.productionTip = false
 

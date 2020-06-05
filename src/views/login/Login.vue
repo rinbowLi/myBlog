@@ -143,6 +143,7 @@ export default {
             .then(res => {
               setToken(res.result.token);
               this.$store.commit("SET_USERNAME", res.result.username);
+              this.$store.commit("SET_TOKEN", res.result.token);
               this.$router.push("/admin");
               this.loading = false;
             })
@@ -179,6 +180,13 @@ $cursor: #fff;
   .login-container .el-input input {
     color: $cursor;
   }
+}
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+  box-shadow: none;
 }
 
 /* reset element-ui css */

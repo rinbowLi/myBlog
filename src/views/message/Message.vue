@@ -197,7 +197,7 @@ export default {
         });
         return;
       }
-      if (code != this.text) {
+      if (code.toLocaleLowerCase() != this.text.toLocaleLowerCase()) {
         Message({
           message: "请填写正确的验证码哦~",
           type: "warning"
