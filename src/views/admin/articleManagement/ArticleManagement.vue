@@ -102,7 +102,7 @@ export default {
   data() {
     return {
       articleCount: 0,
-      pageSize: 3,
+      pageSize: 6,
       curPage: 1,
       articleList: [],
       dialogTitle: "编辑文章",
@@ -268,7 +268,7 @@ export default {
       this._getArticleCount();
     },
     //分页查询文章
-    selectArticle(page = 1, pageSize = 3) {
+    selectArticle(page = 1, pageSize = 6) {
       let data = {
         pageSize,
         page

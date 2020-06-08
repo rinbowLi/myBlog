@@ -8,8 +8,8 @@
       <div class="s-d">
         <p class="p-bold">名称：RinbowLi</p>
         <p class="p-bold">网址：https://www.rinbowli.cn/</p>
-        <p class="p-bold">图标：https://www.rinbowli.cn/public/img/lg.png</p>
-        <p class="p-bold">描述：哈哈哈</p>
+        <p class="p-bold">图标：https://www.rinbowli.cn/public/img/avatar.jpg</p>
+        <p class="p-bold">描述：一枚渣渣前端攻城狮</p>
       </div>
       <div class="link-myd des">
         <p>本站优先选择同类原创、内容相近的博客或网站，您的站点内容可以为技术类、IT科技、互联网和生活</p>
@@ -23,7 +23,7 @@
         <li class="link-item" v-for="item in linkList" :key="item._id">
           <a target="_blank" :href="item.link">
             <div class="link-f">
-              <img class="linkLogo" :src="item.imgUrl" />
+              <img class="linkLogo" v-lazy="item.imgUrl" />
               <span>{{item.name}}</span>
             </div>
             <p class="link-s">{{item.desc}}</p>

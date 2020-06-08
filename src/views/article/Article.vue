@@ -17,7 +17,7 @@
               >
                 <a>
                   <div class="post-footer-thumbnail">
-                    <img :src="require('@/assets/bg4.jpg')" />
+                    <img v-lazy="require('@/assets/bg4.jpg')"/>
                   </div>
                   <span class="post-footer-label">Previous Post</span>
                   <div class="post-footer-title">
@@ -32,7 +32,7 @@
               >
                 <a>
                   <div class="post-footer-thumbnail">
-                    <img :src="require('@/assets/bg4.jpg')" />
+                    <img v-lazy="require('@/assets/bg4.jpg')"/>
                   </div>
                   <span class="post-footer-label">Next Post</span>
                   <div class="post-footer-title">
@@ -85,8 +85,6 @@ export default {
     selectNextAndPrevArticleByID(id) {
       selectNextAndPrevArticle({ id })
         .then(res => {
-          console.log(res);
-          debugger;
           this.next = res.data.next[0] || {};
           this.prev = res.data.prev[0] || {};
         })

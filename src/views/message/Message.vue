@@ -74,7 +74,7 @@
             <li class="msg-item" v-for="item in messageList" :key="item.id">
               <div class="msg-div clearfix">
                 <div class="li-r fl">
-                  <img src="@/assets/avatar2.png" alt="默认头像" />
+                  <img v-lazy="'@/assets/avatar2.png'" alt="默认头像" />
                 </div>
                 <div class="li-l fl">
                   <p class="name">

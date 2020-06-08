@@ -54,7 +54,7 @@ export default {
           this.article.content = marked(this.article.content);
           //格式化时间
           this.article.time = getFormatDate(this.article.time);
-          this.article.updateTime = getFormatDate(this.article.updateTime);
+          this.article.updateTime = getFormatDate(this.article.time);
           this.$bus.$emit("commentCount", this.article.commentCount);
           this.$bus.$emit("allowComment", this.article.allowComment === 1);
           this.$bus.$emit("articleId", this.article._id);

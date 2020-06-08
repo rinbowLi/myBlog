@@ -23,7 +23,7 @@
           class="aniview animated fadeInUp"
           data-av-animation="fadeInUp"
           style="opacity: 1;"
-        >一枚渣渣前端攻城狮，性别男，记录前端学习爬坑经历</p>
+        >一枚渣渣前端攻城狮，记录前端学习爬坑经历</p>
       </div>
       <p class="addr">
         <i class="iconfont icon-weizhi"></i>广东-深圳
@@ -54,7 +54,7 @@
                 class="subc aniview animated fadeInUp"
                 data-av-animation="fadeInUp"
                 style="opacity: 1;"
-              >一直想做一件事——为自己写一个个人网站，主要记录学习过程中遇到的问题，同时可以记录生活中的故事。但是却迟迟 没有付诸行动，时间总是被各种事情塞满，课程？考试？工作？说到底还是一个懒字！2020年的这个春节被困在家里， 才着手开始，正好学习一下node.js，从页面编写到部署上线大概花费了二十天的时间，主要在界面的设计上花费了一些时间，个人比较喜欢简单干净的页面， 一直在改改改并没改出令自己满意的页面，暂且先像现在这样吧！本站未使用任何模板，从设计到开发均为个人原创，如果前端页面的设计碰到了合眼缘的同学，欢迎仿照，但请标明出处。本站目前只实现了一些简单的功能，主要用于分享一些文章，后期会对网站进行更新。</p>
+              >一直想做自己做一个博客网站，前后端都自己做的那种，年前的时候用了typecho搭建了一套自己的博客网站，但也是用一套模板生成的，没什么技术含量，后来自己在b站上面学习了一段时间的nodejs,,就有了自己重构博客网站的想法，于是开始动手做，把之前搭建的博客网站用vue+node重构了一次，博客网站主体部分样式参考<a href="https://eriri.ink/archives/Typecho-Theme-Aria.html" target="_blank">Typecho-Theme-Aria</a>,时光轴、留言等页面样式参考<a href="https://www.tanj.com.cn/" target="_blank">TanJia</a>。目前网站只做了一些基础的功能，可能有很多问题，欢迎大家提bug和建议，留言。</p>
             </div>
           </div>
         </div>
@@ -69,8 +69,6 @@
                 <span
                   class="progress-bar-inner"
                   style="background-color: #1abc9c; width: 80%;"
-                  data-value="80"
-                  data-percentage-value="80"
                 ></span>
               </div>
             </div>
@@ -83,8 +81,6 @@
                 <span
                   class="progress-bar-inner"
                   style="background-color: #ff5500; width: 75%;"
-                  data-value="75"
-                  data-percentage-value="75"
                 ></span>
               </div>
             </div>
@@ -97,8 +93,6 @@
                 <span
                   class="progress-bar-inner"
                   style="background-color: #5555ff; width: 80%;"
-                  data-value="80"
-                  data-percentage-value="80"
                 ></span>
               </div>
             </div>
@@ -111,8 +105,6 @@
                 <span
                   class="progress-bar-inner"
                   style="background-color: #aa55ff; width: 50%;"
-                  data-value="50"
-                  data-percentage-value="50"
                 ></span>
               </div>
             </div>
@@ -120,13 +112,11 @@
               <div class="pro-bar">
                 <small class="progress_bar_title">
                   Vue.js
-                  <span class="progress_number">50%</span>
+                  <span class="progress_number">85%</span>
                 </small>
                 <span
                   class="progress-bar-inner"
-                  style="background-color: #55aa00; width: 50%;"
-                  data-value="50"
-                  data-percentage-value="50"
+                  style="background-color: #55aa00; width: 85%;"
                 ></span>
               </div>
             </div>
@@ -139,8 +129,6 @@
                 <span
                   class="progress-bar-inner"
                   style="background-color: #ff7280; width: 30%;"
-                  data-value="30"
-                  data-percentage-value="30"
                 ></span>
               </div>
             </div>
@@ -148,13 +136,11 @@
               <div class="pro-bar">
                 <small class="progress_bar_title">
                   C# .Net
-                  <span class="progress_number">10%</span>
+                  <span class="progress_number">20%</span>
                 </small>
                 <span
                   class="progress-bar-inner"
-                  style="background-color: #d2d200; width: 10%;"
-                  data-value="10"
-                  data-percentage-value="10"
+                  style="background-color: #d2d200; width: 20%;"
                 ></span>
               </div>
             </div>
@@ -162,13 +148,11 @@
               <div class="pro-bar">
                 <small class="progress_bar_title">
                   mongoDB
-                  <span class="progress_number">20%</span>
+                  <span class="progress_number">30%</span>
                 </small>
                 <span
                   class="progress-bar-inner"
-                  style="background-color: #2fbdff; width: 20%;"
-                  data-value="20"
-                  data-percentage-value="20"
+                  style="background-color: #2fbdff; width: 30%;"
                 ></span>
               </div>
             </div>
@@ -181,8 +165,6 @@
                 <span
                   class="progress-bar-inner"
                   style="background-color: #55557f; width: 40%;"
-                  data-value="40"
-                  data-percentage-value="40"
                 ></span>
               </div>
             </div>
@@ -194,9 +176,9 @@
             <h2>关于本站</h2>
             <div>
               <p>
-                前 端 ：VUE全家桶
-                <br />插 件 ：highlight.js(代码高亮插件)、clipboard(点击复制代码插件)、marked(渲染Markdown格式插件)、mavon-editor(Markdown编写插件)、element-ui
-                <br />后 端 ：Node.js + Express + MongoDB + Mongoose
+                前 端 ：VUE全家桶   <a href="https://github.com/rinbowLi/myBlog" style="color:blue" target="_blank">github地址,欢迎点赞哦~</a>
+                <br />插 件 ：highlight.js(代码高亮插件)、clipboard(点击复制代码插件)、marked(渲染Markdown格式插件)、mavon-editor(Markdown编写插件)、element-ui、vuex-persistedstate(vuex持久化插件)
+                <br />后 端 ：Node.js + Express + MongoDB + Mongoose  <a href="https://github.com/rinbowLi/myBlog-node" style="color:blue" target="_blank">github地址,欢迎点赞哦~</a>
               </p>
             </div>
             <h2>特别说明</h2>
@@ -282,10 +264,8 @@ export default {
     margin: auto;
     background-color: #6a70ec;
     .banner-bgImage {
-      position: absolute;
       width: 100%;
       min-width: 1100px;
-      height: calc(100vh - 50px);
       background-size: cover;
       background-attachment: fixed;
       background-image: url("../../assets/back.jpg");

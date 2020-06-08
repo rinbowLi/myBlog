@@ -8,7 +8,7 @@
         <a class="fancybox" rel="group">
           <img
             id="wechat_qr"
-            v-lazy="'https://www.rinbowli.cn/usr/uploads/images/WeChatPay.jpg'"
+            v-lazy="'https://api.rinbowli.cn/public/img/WeChatPay.jpg'"
             alt="WeChat Pay"
           />
         </a>
@@ -18,7 +18,7 @@
         <a class="fancybox" rel="group">
           <img
             id="alipay_qr"
-            v-lazy="'https://www.rinbowli.cn/usr/uploads/images/AliPay.jpg'"
+            v-lazy="'https://api.rinbowli.cn/public/img/AliPay.jpg'"
             alt="Alipay"
           />
         </a>

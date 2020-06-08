@@ -1,7 +1,7 @@
 <template>
   <div class="timeline">
     <div class="hearder-box">
-      <img src="@/assets/timeline.jpg" alt />
+      <img v-lazy="'@/assets/timeline.jpg'" alt />
     </div>
     <div class="axis-content">
       <ul class="axis-list">

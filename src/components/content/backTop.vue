@@ -1,5 +1,5 @@
 <template>
-  <div id="go-top" v-show="isShow">
+  <div id="go-top" v-if="isShow">
     <img src="@/assets/goTop.png" @click="backTop" />
   </div>
 </template>

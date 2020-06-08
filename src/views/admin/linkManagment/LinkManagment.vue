@@ -8,7 +8,7 @@
       <el-table-column prop="link" label="友链链接" width="200"></el-table-column>
       <el-table-column label="友链图片url" width="250">
         <template slot-scope="scope">
-          <img :src="scope.row.imgUrl"  height="40" class="head_pic" />
+          <img v-lazy="scope.row.imgUrl" height="40" class="head_pic" />
         </template>
       </el-table-column>
       <el-table-column prop="desc" label="友链描述"></el-table-column>
