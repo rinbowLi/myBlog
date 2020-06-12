@@ -8,7 +8,7 @@
       <div class="s-d">
         <p class="p-bold">名称：RinbowLi</p>
         <p class="p-bold">网址：https://www.rinbowli.cn/</p>
-        <p class="p-bold">图标：https://www.rinbowli.cn/public/img/avatar.jpg</p>
+        <p class="p-bold">图标：https://api.rinbowli.cn/public/img/avatar.jpg</p>
         <p class="p-bold">描述：一枚渣渣前端攻城狮</p>
       </div>
       <div class="link-myd des">

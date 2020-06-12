@@ -67,7 +67,13 @@
           <el-switch v-model="form.allowComment"></el-switch>
         </el-form-item>
         <el-form-item label="文章内容" prop="content">
-          <mavon-editor v-model="form.content" ref="md" style="min-height: 600px" />
+          <mavon-editor
+            @imgAdd="imgAdd"
+            @imgDel="imgDel"
+            v-model="form.content"
+            ref="md"
+            style="min-height: 600px"
+          />
         </el-form-item>
       </el-form>
 
@@ -303,6 +309,12 @@ export default {
       if (page < 1 || page > Math.ceil(this.articleCount / pageSize)) return;
       this.curPage = page;
       this.selectArticle(page, pageSize);
+    },
+    imgAdd(pos, $file) {
+      console.log(pos,$file)
+    },
+    imgDel(pos) {
+      console.log(pos)
     }
   }
 };

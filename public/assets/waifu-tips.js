@@ -410,7 +410,7 @@ function loadTipsMessage(result) {
         }
     }
 
-    $('.waifu-tool .fui-eye').click(function () { loadOtherModel() });
-    $('.waifu-tool .fui-user').click(function () { loadRandTextures() });
-    $('.waifu-tool .fui-chat').click(function () { showHitokoto() });
+    $(document).on('click','.waifu-tool .fui-eye',function () { loadOtherModel() });
+    $(document).on('click','.waifu-tool .fui-user',function () { loadRandTextures() });
+    $(document).on('click','.waifu-tool .fui-chat',function () { showHitokoto() });
 }
