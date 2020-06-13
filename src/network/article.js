@@ -47,3 +47,26 @@ export function addArticle(data){
     data
   })
 }
+
+
+//文章上传图片
+export function uploadImage(data){
+  return request({
+    url: '/image/uploadImage',
+    method: 'post',
+    data,
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+}
+
+
+//文章删除图片
+export function delImgByUrl(data){
+  return request({
+    url: '/image/delImgByUrl',
+    method: 'post',
+    data
+  })
+}

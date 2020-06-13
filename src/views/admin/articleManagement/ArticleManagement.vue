@@ -96,7 +96,9 @@ import {
   selectNextAndPrevArticle,
   addArticle,
   delArticle,
-  updateArticle
+  updateArticle,
+  uploadImage,
+  delImgByUrl
 } from "@/network/article";
 import { selectArticleByPage, getArticleCount } from "@/network/home";
 import { getFormatDate, cutString } from "@/utils/utils";
@@ -311,10 +313,37 @@ export default {
       this.selectArticle(page, pageSize);
     },
     imgAdd(pos, $file) {
-      console.log(pos,$file)
+      //以formdata格式上传
+      let formData = new FormData();
+      //原来的baseUrl 如localhost:3000/最后对了个/，下面要去掉
+      let BaseUrl = process.env.VUE_APP_BASE_API;
+      BaseUrl = BaseUrl.substr(0, BaseUrl.length - 1);
+      formData.append("file", $file);
+      uploadImage(formData)
+        .then(res => {
+          this.$refs.md.$img2Url(pos, BaseUrl + res.url);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     imgDel(pos) {
-      console.log(pos)
+      // pos[0]为图片url
+      delImgByUrl({ url: pos[0] })
+        .then(res => {
+          Message({
+            message: "图片删除成功",
+            type: "success",
+            duration: 1500
+          });
+        })
+        .catch(err => {
+            Message({
+            message: err,
+            type: "error",
+            duration: 1500
+          });
+        });
     }
   }
 };
