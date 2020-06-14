@@ -33,8 +33,8 @@
             <router-link :to="'/article/'+item._id">
               <div
                 class="card-thumbnail lazyload"
-                :data-original="bgImg"
-                :style="{backgroundImage: 'url('+bgImg+')',backgroundRepeat:'no-repeat',backgroundSize:'100%',backgroundPosition:'center'}"
+                :data-original="item.imgUrl"
+                :style="{backgroundImage: 'url('+item.imgUrl+')',backgroundRepeat:'no-repeat',backgroundSize:'100%',backgroundPosition:'center'}"
               ></div>
             </router-link>
             <div class="card-body">{{item.content}}</div>
@@ -81,12 +81,13 @@
 <script>
 import { selectArticleBykeyword } from "@/network/search";
 import { getArticleCount } from "@/network/home";
-import { getFormatDate, cutString } from "@/utils/utils";
+import { getFormatDate, cutString, getBaseUrl } from "@/utils/utils";
 
 export default {
   inject: ["routerRefresh"], //在子组件中注入在父组件中创建的属性
   data() {
     return {
+      baseUrl: getBaseUrl(),
       articleList: [],
       curCatalog: "",
       articleCount: 0,
@@ -115,6 +116,11 @@ export default {
           this.articleList.map(v => {
             v.time = getFormatDate(v.time);
             v.content = cutString(v.content, 90);
+            if (!v.imgUrl) {
+              v.imgUrl = this.bgImg;
+            } else {
+              v.imgUrl = this.baseUrl + v.imgUrl;
+            }
           });
         })
         .catch(err => {

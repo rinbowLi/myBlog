@@ -74,3 +74,11 @@ export function clipboard() {
     Message.error('代码拷贝失败')
   })
 }
+
+
+export function getBaseUrl() {
+  //原来的baseUrl 如localhost:3000/最后对了个/，下面要去掉
+  let BaseUrl = process.env.VUE_APP_BASE_API;
+  BaseUrl = BaseUrl.substr(0, BaseUrl.length - 1);
+  return BaseUrl;
+}

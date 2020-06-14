@@ -18,7 +18,7 @@
         >
           <div :id="'comment-'+index">
             <a class="comment-avatar" :href="'#comment-'+index">
-              <img class="avatar" v-lazy="require('@/assets/avatar.png')" alt="rinbowLi" width="120" height="120" />
+              <img class="avatar" src="@/assets/avatar.png" alt="rinbowLi" width="120" height="120" />
             </a>
             <div class="comment-content">
               <div class="comment-text">
@@ -57,7 +57,7 @@
                     <a class="comment-avatar" :href="'#comment-'+index1">
                       <img
                         class="avatar"
-                        v-lazy="'@/assets/avatar2.png'"
+                        src="@/assets/avatar2.png"
                         alt="test"
                         width="120"
                         height="120"

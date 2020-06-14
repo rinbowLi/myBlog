@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/home/Home.vue'
-import {
-  getToken
-} from '../utils/auth'
+
 
 Vue.use(VueRouter)
 
@@ -141,18 +139,6 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-})
-
-//全局路由守卫，跳转新页面时滚动条回到顶部
-router.beforeEach((to, from, next) => {
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
-  let token = getToken();
-  if (to.meta.needLogin && !token) {
-    next("/login" + "?redirect=" + from.fullPath)
-  } else {
-    next()
-  }
 })
 
 export default router

@@ -66,11 +66,28 @@
         <el-form-item label="是否允许评论" prop="allowComment">
           <el-switch v-model="form.allowComment"></el-switch>
         </el-form-item>
+        <el-form-item label="上传文章标题图片" prop="imgUrl">
+          <el-upload
+            class="upload-demo"
+            :action="uploadImageUrl"
+            :on-preview="handlePreview"
+            :on-remove="handleRemove"
+            :on-success="handleSuccess"
+            :on-exceed="handleExceed"
+            :file-list="fileList"
+            list-type="picture"
+            :limit="1"
+          >
+            <el-button size="small" type="primary">点击上传</el-button>
+            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+          </el-upload>
+        </el-form-item>
         <el-form-item label="文章内容" prop="content">
           <mavon-editor
             @imgAdd="imgAdd"
             @imgDel="imgDel"
             v-model="form.content"
+            :limit="1"
             ref="md"
             style="min-height: 600px"
           />
@@ -101,7 +118,7 @@ import {
   delImgByUrl
 } from "@/network/article";
 import { selectArticleByPage, getArticleCount } from "@/network/home";
-import { getFormatDate, cutString } from "@/utils/utils";
+import { getFormatDate, cutString, getBaseUrl } from "@/utils/utils";
 export default {
   name: "articleMan",
   components: {
@@ -109,6 +126,7 @@ export default {
   },
   data() {
     return {
+      baseUrl:getBaseUrl(),
       articleCount: 0,
       pageSize: 6,
       curPage: 1,
@@ -116,13 +134,15 @@ export default {
       dialogTitle: "编辑文章",
       dialogFormVisible: false,
       dialogStatus: "create",
+      fileList: [],
       form: {
         title: "",
         catalog: "",
         tags: "",
         isTop: false,
         allowComment: true,
-        content: "" //Markdown内容
+        content: "", //Markdown内容
+        imgUrl: "" //文章标题图片url
       },
       rules: {
         catalog: [{ required: true, message: "文章分类必填", trigger: "blur" }],
@@ -136,12 +156,56 @@ export default {
       return (
         Math.ceil(this.articleCount / this.pageSize) >= 2 || this.curPage != 1
       );
+    },
+    uploadImageUrl() {
+      let BaseUrl = this.baseUrl;
+      return BaseUrl + "/image/uploadImage";
     }
   },
   created() {
     this.init();
   },
   methods: {
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+      delImgByUrl({ url: this.form.imgUrl })
+        .then(res => {
+          Message({
+            message: "图片删除成功",
+            type: "success",
+            duration: 1500
+          });
+          //删除成功后清除图片路径
+          this.form.imgUrl = "";
+        })
+        .catch(err => {
+          Message({
+            message: err,
+            type: "error",
+            duration: 1500
+          });
+        });
+    },
+    handlePreview(file) {
+      console.log(file);
+    },
+    handleSuccess(response, file, fileList) {
+      if (response.code === 0) {
+        this.form.imgUrl = response.url;
+        Message({
+          message: "图片上传成功",
+          type: "success",
+          duration: 1500
+        });
+      }
+    },
+    handleExceed() {
+      Message({
+        message: "最多只能上传一张图片",
+        type: "warning",
+        duration: 1500
+      });
+    },
     closeDialog() {
       //关闭对话框，重置表单
       this.dialogFormVisible = false;
@@ -153,8 +217,10 @@ export default {
         tags: "",
         isTop: false,
         allowComment: true,
-        content: "" //Markdown内容
+        content: "", //Markdown内容
+        imgUrl: ""
       };
+      this.fileList = [];
     },
     //格式化是否允许评论
     formatAllowComment(row, column) {
@@ -181,6 +247,13 @@ export default {
         this.form.isTop = data.isTop === 1; //为1时就是置顶
         this.form.allowComment = data.allowComment === 1; //为1时是允许评论
         this.form.id = data._id;
+        this.form.imgUrl = data.imgUrl;
+        if (data.imgUrl) {
+          this.fileList.push({
+            name: "文章标题图片",
+            url: this.baseUrl + data.imgUrl
+          });
+        }
       }
       this.dialogFormVisible = true;
     },
@@ -193,7 +266,8 @@ export default {
             catalog: this.form.catalog,
             tags: this.form.tags,
             isTop: this.form.isTop,
-            allowComment: this.form.allowComment
+            allowComment: this.form.allowComment,
+            imgUrl: this.form.imgUrl
           };
           addArticle(data)
             .then(res => {
@@ -206,6 +280,7 @@ export default {
               this.init();
               this.$refs.dataForm.resetFields();
               this.$refs.dataForm.clearValidate();
+              this.fileList = [];
             })
             .catch(err => {
               console.log(err);
@@ -224,7 +299,8 @@ export default {
             catalog: this.form.catalog,
             tags: this.form.tags,
             isTop: this.form.isTop,
-            allowComment: this.form.allowComment
+            allowComment: this.form.allowComment,
+            imgUrl: this.form.imgUrl
           };
           updateArticle(data)
             .then(res => {
@@ -237,6 +313,7 @@ export default {
               this.init();
               this.$refs.dataForm.resetFields();
               this.$refs.dataForm.clearValidate();
+              this.fileList = [];
             })
             .catch(err => {
               console.log(err);
@@ -315,13 +392,10 @@ export default {
     imgAdd(pos, $file) {
       //以formdata格式上传
       let formData = new FormData();
-      //原来的baseUrl 如localhost:3000/最后对了个/，下面要去掉
-      let BaseUrl = process.env.VUE_APP_BASE_API;
-      BaseUrl = BaseUrl.substr(0, BaseUrl.length - 1);
       formData.append("file", $file);
       uploadImage(formData)
         .then(res => {
-          this.$refs.md.$img2Url(pos, BaseUrl + res.url);
+          this.$refs.md.$img2Url(pos, this.baseUrl + res.url);
         })
         .catch(err => {
           console.log(err);
@@ -338,7 +412,7 @@ export default {
           });
         })
         .catch(err => {
-            Message({
+          Message({
             message: err,
             type: "error",
             duration: 1500
