@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/home/Home.vue'
 
 
 Vue.use(VueRouter)
@@ -14,9 +13,10 @@ VueRouter.prototype.push = function push(to) {
 const routes = [{
     path: '/',
     name: 'Home',
-    component: Home,
+    component: () => import( /* webpackChunkName: "about" */ '../views/home/Home.vue'),
     meta: {
-      needLogin: false
+      needLogin: false,
+      title: "rinbowli的博客"
     }
   },
   {
@@ -24,7 +24,8 @@ const routes = [{
     name: 'Article',
     component: () => import( /* webpackChunkName: "about" */ '../views/article/Article.vue'),
     meta: {
-      needLogin: false
+      needLogin: false,
+      title: ""
     }
   },
   {
@@ -32,7 +33,8 @@ const routes = [{
     name: 'Catalog',
     component: () => import( /* webpackChunkName: "about" */ '../views/catalog/Catalog.vue'),
     meta: {
-      needLogin: false
+      needLogin: false,
+      title: "分类页"
     }
   },
   {
@@ -40,7 +42,8 @@ const routes = [{
     name: 'Search',
     component: () => import( /* webpackChunkName: "about" */ '../views/search/Search.vue'),
     meta: {
-      needLogin: false
+      needLogin: false,
+      title: "搜索页"
     }
   },
   {
@@ -48,7 +51,8 @@ const routes = [{
     name: 'Timeline',
     component: () => import( /* webpackChunkName: "about" */ '../views/timeline/Timeline.vue'),
     meta: {
-      needLogin: false
+      needLogin: false,
+      title: "我的时光轴"
     }
   },
   {
@@ -56,7 +60,8 @@ const routes = [{
     name: 'About',
     component: () => import( /* webpackChunkName: "about" */ '../views/about/About.vue'),
     meta: {
-      needLogin: false
+      needLogin: false,
+      title: "关于作者"
     }
   },
   {
@@ -64,7 +69,8 @@ const routes = [{
     name: 'Message',
     component: () => import( /* webpackChunkName: "about" */ '../views/message/Message.vue'),
     meta: {
-      needLogin: false
+      needLogin: false,
+      title: "留言板"
     }
   },
   {
@@ -72,7 +78,8 @@ const routes = [{
     name: 'Link',
     component: () => import( /* webpackChunkName: "about" */ '../views/link/Link.vue'),
     meta: {
-      needLogin: false
+      needLogin: false,
+      title: "友链"
     }
   },
   {

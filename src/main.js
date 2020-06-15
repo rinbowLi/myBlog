@@ -52,6 +52,9 @@ NProgress.configure({
 
 //全局路由守卫，跳转新页面时滚动条回到顶部
 router.beforeEach((to, from, next) => {
+  if(to.meta.title){
+    document.title = to.meta.title;
+  }
 
   // 每次切换页面时，调用进度条
   NProgress.start();

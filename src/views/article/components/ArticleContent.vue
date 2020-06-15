@@ -48,8 +48,8 @@ export default {
     getArticle(id) {
       selectArticleById(id)
         .then(res => {
-          console.log(res);
           this.article = res.data;
+          document.title = res.data.title;
           //格式化markdown格式文本
           this.article.content = marked(this.article.content);
           //格式化时间
