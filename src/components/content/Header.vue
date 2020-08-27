@@ -6,6 +6,22 @@
       <h2 id="site-description">{{siteData.siteDescription}}</h2>
     </div>
     <div id="bg-img" :style="{backgroundImage:'url('+siteData.url+')'}"></div>
+    <video
+      id="bg-video"
+      class="video_bg"
+      src="https://business.xiongmaoboshi.com/test/video/timo-1597888220931-922.mp4"
+      loop="loop"
+      autoplay="autoplay"
+      muted="muted"
+      :poster="siteData.url"
+      x-webkit-airplay="allow"
+      x5-video-orientation="portraint"
+      webkit-playsinline="true"
+      playsinline="playsinline"
+      x5-playsinline="true"
+      x5-video-player-fullscreen="true"
+      style="opacity: 1;"
+    ></video>
   </header>
 </template>
 
@@ -76,8 +92,18 @@ export default {
     background-position: center;
     // style="{backgroundImage: 'url('+item.bgImg+')',backgroundRepeat:'no-repeat',backgroundSize:'100%',backgroundPosition:'center'}"
     position: relative;
-    z-index: -1;
+    z-index: -2;
     background-size: cover;
+  }
+  #bg-video {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: fill;
+    opacity: 0;
+    transition: all 0.3s;
   }
 }
 </style>
